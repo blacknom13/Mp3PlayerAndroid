@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <string-array name="list">
+        <item>Elapsed</item>
+        <item>Reminded</item>
+    </string-array>
+    
+    <string-array name="aValues">
+        <item>elap</item>
+        <item>rem</item>
+    </string-array>
+    
+</resources>

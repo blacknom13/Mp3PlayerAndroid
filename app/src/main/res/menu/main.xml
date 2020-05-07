@@ -1,0 +1,25 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/action_settings"
+        android:menuCategory="container"
+        android:orderInCategory="2"
+        android:title="Settings"
+        android:icon="@drawable/ic_settings"
+        />
+    
+    <item 
+        android:id="@+id/oExit"
+        android:title="Exit"
+        android:icon="@drawable/ic_exit"
+        android:orderInCategory="1"
+        />
+    
+    <item
+        android:id="@+id/oAbout"
+        android:title="About App"
+        android:icon="@drawable/ic_info"
+        android:orderInCategory="3"
+        />
+
+</menu>

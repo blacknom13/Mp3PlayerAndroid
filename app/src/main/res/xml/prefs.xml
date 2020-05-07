@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+    <ListPreference
+        android:title="Display Elapsed/Reminded Time"
+        android:key="show_time"
+        android:entries="@array/list"
+        android:entryValues="@array/aValues"
+        />
+    
+    <CheckBoxPreference
+        android:title="just"
+        android:key="just"
+        android:defaultValue="true"
+        />
+
+</PreferenceScreen>
