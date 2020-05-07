@@ -46,50 +46,7 @@ public class AdvancedFileManager extends AppCompatActivity implements OnItemClic
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.advanced_file_manager);
-		if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
-				!= PackageManager.PERMISSION_GRANTED) {
-			// Permission is not granted
-			// Should we show an explanation?
-			if (ActivityCompat.shouldShowRequestPermissionRationale(this,
-					Manifest.permission.READ_EXTERNAL_STORAGE)) {
-				// Show an explanation to the user *asynchronously* -- don't block
-				// this thread waiting for the user's response! After the user
-				// sees the explanation, try again to request the permission.
-			} else {
-				// No explanation needed, we can request the permission.
-				ActivityCompat.requestPermissions(this,
-						new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
-						RESULT);
-
-				// MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
-				// app-defined int constant. The callback method gets the
-				// result of the request.
-			}
-		} else {
-			// Permission has already been granted
-		}
-		if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-				!= PackageManager.PERMISSION_GRANTED) {
-			// Permission is not granted
-			// Should we show an explanation?
-			if (ActivityCompat.shouldShowRequestPermissionRationale(this,
-					Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-				// Show an explanation to the user *asynchronously* -- don't block
-				// this thread waiting for the user's response! After the user
-				// sees the explanation, try again to request the permission.
-			} else {
-				// No explanation needed, we can request the permission.
-				ActivityCompat.requestPermissions(this,
-						new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-						RESULT);
-
-				// MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
-				// app-defined int constant. The callback method gets the
-				// result of the request.
-			}
-		} else {
-			// Permission has already been granted
-		}
+		requestPermissions();
 		finalExternalStorage="";
 		finalInternalStorage="";
 		File [] dirs= ContextCompat.getExternalCacheDirs(getApplicationContext());
@@ -248,9 +205,6 @@ public class AdvancedFileManager extends AppCompatActivity implements OnItemClic
 			int id=musicCursor.getColumnIndex(Media._ID);
 			int isMusic=musicCursor.getColumnIndex(Media.IS_MUSIC);
 			int albId=musicCursor.getColumnIndex(Media.ALBUM_ID);
-			//int ss=musicCursor.getColumnIndex(Media.)
-			//int songPath=musicCursor.getColumnIndex(Media)
-			
 			
 			do
 			{
@@ -367,6 +321,31 @@ public class AdvancedFileManager extends AppCompatActivity implements OnItemClic
 				{
 
 				}
+		}
+	}
+
+	public void requestPermissions(){
+		while (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
+				!= PackageManager.PERMISSION_GRANTED &&
+				ContextCompat.checkSelfPermission(this,Manifest.permission.WRITE_EXTERNAL_STORAGE)
+						!=PackageManager.PERMISSION_GRANTED) {
+			// Permission is not granted
+			// Should we show an explanation?
+			if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+					Manifest.permission.READ_EXTERNAL_STORAGE)) {
+				// Show an explanation to the user *asynchronously* -- don't block
+				// this thread waiting for the user's response! After the user
+				// sees the explanation, try again to request the permission.
+			} else {
+				// No explanation needed, we can request the permission.
+				ActivityCompat.requestPermissions(this,
+						new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+						RESULT);
+
+				// MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
+				// app-defined int constant. The callback method gets the
+				// result of the request.
+			}
 		}
 	}
 }

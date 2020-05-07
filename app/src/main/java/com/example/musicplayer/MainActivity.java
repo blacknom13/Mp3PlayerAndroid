@@ -12,14 +12,12 @@ import android.graphics.PorterDuff.Mode;
 import android.graphics.drawable.BitmapDrawable;
 import android.media.MediaPlayer;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.provider.MediaStore;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
+import android.view.*;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
 import android.widget.*;
@@ -136,7 +134,11 @@ public class MainActivity extends AppCompatActivity implements OnClickListener,O
 		//for (int i=0;i<folderTree.size();i++)
 		//Toast.makeText(this, path, Toast.LENGTH_LONG).show();
 		//prepareSongPlayer(path);
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
 
+			getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
+					WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+		}
 	}
 	
 	@Override
@@ -240,14 +242,14 @@ public class MainActivity extends AppCompatActivity implements OnClickListener,O
 			finish();
 			break;
 		case R.id.action_settings:
-			Intent settings=new Intent("com.example.musicplayer.MYPREFERENCES");
+			Intent settings=new Intent(this,MyPreferences.class);
 			startActivity(settings);
 			//getIntent().getExtras().get("showTime");
 			
 			//Toast.makeText(MainActivity.this, showTime, Toast.LENGTH_LONG).show();
 			break;
 		case R.id.oAbout:
-			Intent about=new Intent("com.example.musicplayer.ABOUTAPP");
+			Intent about=new Intent(this,AboutApp.class);
 			startActivity(about);
 			//File f=getDatabasePath("prefs.xml");
 			//Toast.makeText(this, f.getAbsolutePath(), Toast.LENGTH_LONG).show();

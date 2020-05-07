@@ -1,9 +1,9 @@
 package com.example.musicplayer;
 
-import android.app.Activity;
 import android.os.Bundle;
+import androidx.appcompat.app.AppCompatActivity;
 
-public class AboutApp extends Activity{
+public class AboutApp extends AppCompatActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
