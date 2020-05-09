@@ -1,6 +1,5 @@
 package com.example.musicplayer;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,7 +18,7 @@ public class StartUp extends AppCompatActivity {
 			public void run() {
 				try {
 					//Toast.makeText(getBaseContext(), String.valueOf(first), Toast.LENGTH_LONG).show();
-					Thread.sleep(5000);
+					Thread.sleep(1000);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

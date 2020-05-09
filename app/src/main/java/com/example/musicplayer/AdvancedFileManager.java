@@ -10,7 +10,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.provider.MediaStore.Audio.Albums;
 import android.provider.MediaStore.Audio.Media;
@@ -261,8 +260,10 @@ public class AdvancedFileManager extends AppCompatActivity implements OnItemClic
 //				if (i.hasExtra("set"))
 //					i.getExtras().remove("set");
 				i.putExtra("set", x.getAbsolutePath());
+				i.putExtra("ExternalStorage",finalExternalStorage);
 				//Toast.makeText(this, x.getAbsolutePath(), Toast.LENGTH_LONG).show();
 				startActivity(i);
+				this.finish();
 			}
 			break;
 		case R.id.lVSongs:
@@ -273,10 +274,13 @@ public class AdvancedFileManager extends AppCompatActivity implements OnItemClic
 				com.example.musicplayer.MainActivity.getInstance().finish();
 			Uri musicTable=ContentUris.withAppendedId(Media.EXTERNAL_CONTENT_URI,id);
 			Intent intent=new Intent(this, com.example.musicplayer.MainActivity.class);
+//			intent.putExtra("InternalStorage",finalInternalStorage);
+//			intent.putExtra("ExternalStorage",finalExternalStorage);
 			//intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 			//Toast.makeText(this, String.valueOf(id), Toast.LENGTH_LONG).show();
 			intent.putExtra("seto", musicTable);
 			startActivity(intent);
+			this.finish();
 //			try {
 //				mus.setDataSource(this, musicTable);
 //				mus.prepare();

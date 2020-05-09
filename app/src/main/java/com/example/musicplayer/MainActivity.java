@@ -1,6 +1,5 @@
 package com.example.musicplayer;
 
-import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -25,10 +24,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 public class MainActivity extends AppCompatActivity implements OnClickListener,OnLongClickListener{
 
@@ -129,8 +125,6 @@ public class MainActivity extends AppCompatActivity implements OnClickListener,O
 		//else
 		//	first=true;
 		//if (!sharedPreferences.getBoolean("firstTime", true))
-		
-		//initFolderTree("/mnt/sdcard/Music");/storage/sdcard1/Music
 		//for (int i=0;i<folderTree.size();i++)
 		//Toast.makeText(this, path, Toast.LENGTH_LONG).show();
 		//prepareSongPlayer(path);
@@ -148,8 +142,10 @@ public class MainActivity extends AppCompatActivity implements OnClickListener,O
 		//getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setContentView(R.layout.activity_main);
 		init();
+
 //		pathe=(Uri)(getIntent().getExtras().get("seto"));
 //		path=getIntent().getExtras().getString("set");
+//		initFolderTree(path);
 //		if (pathe!=null){
 //			prepareSongPlayer(pathe);
 //			path="/";
@@ -275,6 +271,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener,O
 		else if (path!=null)
 		{
 			prepareSongPlayer(path);
+			initFolderTree(getIntent().getExtras().getString("ExternalStorage"));
 			//Toast.makeText(this, "Was here too", Toast.LENGTH_SHORT).show();
 		}
 		//showTime=PreferenceManager.getDefaultSharedPreferences(MainActivity.this).getString("show_time", "elap");
@@ -327,13 +324,13 @@ public class MainActivity extends AppCompatActivity implements OnClickListener,O
 		switch (v.getId())
 		{
 			case R.id.bPrev:
+			case R.id.bNext:
 				currentId=v.getId();
 				if (mus!=null){
 				moveSong(v.getId());
 				}else moveSong(currentId);
 				break;
 			case R.id.bPlay:
-				
 				if (mus!=null){
 					if (mus.isPlaying())
 					{
@@ -346,12 +343,6 @@ public class MainActivity extends AppCompatActivity implements OnClickListener,O
 						play.setBackgroundResource(com.example.musicplayer.R.drawable.pause_neon);
 						//startPlayProgressUpdater();
 					}
-				}else moveSong(currentId);
-				break;
-			case R.id.bNext:
-				currentId=v.getId();
-				if (mus!=null){
-				moveSong(v.getId());
 				}else moveSong(currentId);
 				break;
 			case R.id.bLoad:
@@ -651,7 +642,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener,O
 		});
 		if (viewId==R.id.bNext)
 			opp*=-1;
-		int j=opp*1;
+		int j=opp;
 		do{
 			if (repeat.getText().equals("no repeatation")||repeat.getText().equals("repeat this song")){
 				if (files.indexOf(filename)-j<0 || files.indexOf(filename)-j>=files.size())
@@ -696,7 +687,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener,O
 				else
 					prevSong=(files.indexOf(filename)-j);
 				}
-			j+=1*opp;
+			j+=opp;
 		}while (new File(path+"/"+files.get(prevSong)).isDirectory());
 		if (!broken){
 		filename=files.get(prevSong);
@@ -904,7 +895,7 @@ private void moveFolder(int nextPrevFolder,boolean fromMoveFold) {
 	{
 		File x=new File(initialPath);
 		if (x.canRead()){
-			List<String> dirs=Arrays.asList(x.list());
+			List<String> dirs=Arrays.asList(Objects.requireNonNull(x.list()));
 			if (dirs.size()!=0){
 				//folderTree.add(initialPath);
 				//Toast.makeText(MainActivity.this, "here", Toast.LENGTH_SHORT).show();
